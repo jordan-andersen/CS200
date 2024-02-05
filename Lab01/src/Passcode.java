@@ -76,7 +76,7 @@ public class Passcode {
             GuessCell reference_cell = this.cell_array[i];
             GuessCell comparand_cell = comparand_passcode.getCell(i);
             if ( comparand_cell.equals(reference_cell) ) {
-                correct_place_counter = correct_place_counter + 1;
+                correct_place_counter += 1;
                 checked_reference[i] = true;
                 checked_comparand[i] = true;
             }
@@ -89,7 +89,7 @@ public class Passcode {
                 for ( int j = 0; j < this.cell_array.length; j++ ) {
                     GuessCell reference_cell = this.cell_array[j];
                     if ( !checked_reference[j] && !checked_comparand[i] && comparand_cell.equals(reference_cell) ) {
-                        correct_color_counter = correct_color_counter + 1;
+                        correct_color_counter += 1;
                         checked_reference[j] = true;
                         checked_comparand[i] = true;
                     }

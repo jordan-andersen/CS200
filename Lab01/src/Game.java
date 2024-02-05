@@ -50,7 +50,7 @@ public class Game {
             this.game_end = true;
         }
 
-        this.game_round = this.game_round + 1;
+        this.game_round += 1;
     }
 
     /**

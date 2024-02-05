@@ -19,7 +19,7 @@ public class Main {
             int valid_inputs = 0;
             for (String color : user_guess) {
                 if (GuessCell.checkColorValidity(color)) {
-                    valid_inputs = valid_inputs + 1;
+                    valid_inputs += 1;
                 }
             }
 
