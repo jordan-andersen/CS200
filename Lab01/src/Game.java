@@ -93,11 +93,11 @@ public class Game {
     public String getResultsMessages(){
         if ( correct_guess ) {
             return "\nYOU WIN!! The passcode was: " + this.game_passcode.toString() + "\n";
-        } else if ( game_end ) {
-            return "\nYOU LOSE!! The passcode was: " + this.game_passcode.toString() + "\n";
-        } else {
-            return "\nIncorrect! Try again!\n";
         }
+        if ( game_end ) {
+            return "\nYOU LOSE!! The passcode was: " + this.game_passcode.toString() + "\n";
+        }
+        return "\nIncorrect! Try again!\n";
     }
 
     public boolean checkGameEnd() { return game_end; }
