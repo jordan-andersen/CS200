@@ -6,27 +6,27 @@ public class Passcode {
      */
 
     // ATTRIBUTES
-    private final GuessCell[] cell_array;
+    private final GuessCell[] cellArray;
 
     // METHODS
     /** 
      * The constructor for Passcode. This method is private to allow for various creation methods, either by user input
      * or random selection.
      */
-    private Passcode(GuessCell[] passed_array) { this.cell_array = passed_array; }
+    private Passcode(GuessCell[] givenArray) { this.cellArray = givenArray; }
 
 
     /** 
      * Creates a randomly generated game reference passcode.
      */
     public static Passcode createGamePasscode(int length) {
-        GuessCell[] passcode_array = new GuessCell[length];
+        GuessCell[] passcodeArray = new GuessCell[length];
 
         for ( int i = 0; i < length; i++) {
-            passcode_array[i] = GuessCell.createRandomCell();
+            passcodeArray[i] = GuessCell.createRandomCell();
         }
 
-        return new Passcode(passcode_array);
+        return new Passcode(passcodeArray);
     }
 
     /** 
@@ -34,18 +34,18 @@ public class Passcode {
      */
     public static Passcode createGuessPasscode(int length, String[] colors) {
         if (length == colors.length) {
-            GuessCell[] passcode_array = new GuessCell[length];
+            GuessCell[] passcodeArray = new GuessCell[length];
 
             for (int i = 0; i < colors.length; i++) {
                 GuessCell new_guesscell = GuessCell.createCell(colors[i]);
                 if (new_guesscell != null) {
-                    passcode_array[i] = new_guesscell;
+                    passcodeArray[i] = new_guesscell;
                 } else {
                     System.err.println("PASSCODE.createNewPasscode: Invalid color passed!");
                 }
             }
 
-            return new Passcode(passcode_array);
+            return new Passcode(passcodeArray);
         } else {
             System.err.println("PASSCODE.createNewPasscode: Unable to created new passcode!");
             return null;
@@ -55,9 +55,9 @@ public class Passcode {
     /** 
      * Returns a GuessCell object from a specified index.
      */
-    public GuessCell getCell(int cell_index) {
-        if ( cell_index < this.cell_array.length ) {
-            return this.cell_array[cell_index];
+    public GuessCell getCell(int i) {
+        if ( i < this.cellArray.length ) {
+            return this.cellArray[i];
         }
         return null;
     }
@@ -66,37 +66,37 @@ public class Passcode {
      * Compares a passed Passcode with self and returns a two integer array of the number of correct places and
      * correct colors. Should only be called on the reference passcode.
      */
-    public int[] comparePasscode(Passcode comparand_passcode) {
-        int correct_place_counter = 0;
-        int correct_color_counter = 0;
-        boolean[] checked_reference = new boolean[this.cell_array.length];
-        boolean[] checked_comparand = new boolean[this.cell_array.length];
+    public int[] comparePasscode(Passcode comparandPasscode) {
+        int correctPlaceCounter = 0;
+        int correctColorCounter = 0;
+        boolean[] checkedReference = new boolean[this.cellArray.length];
+        boolean[] checkedComparand = new boolean[this.cellArray.length];
 
-        for ( int i = 0; i < this.cell_array.length; i++ ) {
-            GuessCell reference_cell = this.cell_array[i];
-            GuessCell comparand_cell = comparand_passcode.getCell(i);
-            if ( comparand_cell.equals(reference_cell) ) {
-                correct_place_counter += 1;
-                checked_reference[i] = true;
-                checked_comparand[i] = true;
+        for (int i = 0; i < this.cellArray.length; i++ ) {
+            GuessCell referenceCell = this.cellArray[i];
+            GuessCell comparandCell = comparandPasscode.getCell(i);
+            if ( comparandCell.equals(referenceCell) ) {
+                correctPlaceCounter += 1;
+                checkedReference[i] = true;
+                checkedComparand[i] = true;
             }
         }
 
 
-        for ( int i = 0; i < this.cell_array.length; i++ ) {
-            if ( !checked_comparand[i] ) {
-                GuessCell comparand_cell = comparand_passcode.getCell(i);
-                for ( int j = 0; j < this.cell_array.length; j++ ) {
-                    GuessCell reference_cell = this.cell_array[j];
-                    if ( !checked_reference[j] && !checked_comparand[i] && comparand_cell.equals(reference_cell) ) {
-                        correct_color_counter += 1;
-                        checked_reference[j] = true;
-                        checked_comparand[i] = true;
+        for (int i = 0; i < this.cellArray.length; i++ ) {
+            if ( !checkedComparand[i] ) {
+                GuessCell comparandCell = comparandPasscode.getCell(i);
+                for (int j = 0; j < this.cellArray.length; j++ ) {
+                    GuessCell reference_cell = this.cellArray[j];
+                    if ( !checkedReference[j] && !checkedComparand[i] && comparandCell.equals(reference_cell) ) {
+                        correctColorCounter += 1;
+                        checkedReference[j] = true;
+                        checkedComparand[i] = true;
                     }
                 }
             }
         }
-        return new int[]{correct_place_counter, correct_color_counter};
+        return new int[]{correctPlaceCounter, correctColorCounter};
     }
 
     /** 
@@ -104,13 +104,13 @@ public class Passcode {
      */
     @Override
     public String toString(){
-        StringBuilder cell_string = new StringBuilder();
+        StringBuilder passcodeString = new StringBuilder();
 
-        for (GuessCell cell : this.cell_array) {
-            cell_string.append(cell.toString());
-            cell_string.append(" ");
+        for (GuessCell cell : this.cellArray) {
+            passcodeString.append(cell.toString());
+            passcodeString.append(" ");
         }
 
-        return cell_string.toString();
+        return passcodeString.toString();
     }
 }

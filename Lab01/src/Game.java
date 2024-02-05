@@ -9,48 +9,48 @@ public class Game {
      */
 
     // ATTRIBUTES
-    private final int game_limit;
-    private final int passcode_length;
-    private int game_round;
-    private boolean game_end;
-    private boolean correct_guess;
-    private final List<Passcode> guess_history;
-    private final List<int[]> guess_results;
-    private final Passcode game_passcode;
+    private final int gameLimit;
+    private final int passcodeLength;
+    private int gameRound;
+    private boolean continueGame;
+    private boolean correctGuess;
+    private final List<Passcode> guessList;
+    private final List<int[]> resultsList;
+    private final Passcode gamePasscode;
 
     // METHODS
-    public Game(int passed_game_limit, int passed_passcode_length) {
-        this.passcode_length = passed_passcode_length;
-        this.game_limit = passed_game_limit - 1;
-        this.game_round = 0;
-        this.game_end = false;
-        this.correct_guess = false;
-        this.guess_history = new ArrayList<>();
-        this.guess_results = new ArrayList<>();
-        this.game_passcode = Passcode.createGamePasscode(passed_passcode_length);
+    public Game(int givenLimit, int givenLength) {
+        this.passcodeLength = givenLength;
+        this.gameLimit = givenLimit - 1;
+        this.gameRound = 0;
+        this.continueGame = true;
+        this.correctGuess = false;
+        this.guessList = new ArrayList<>();
+        this.resultsList = new ArrayList<>();
+        this.gamePasscode = Passcode.createGamePasscode(givenLength);
     }
 
-    public void inputUserGuess(String[] guess_array){
+    public void inputUserGuess(String[] guessArray){
         // Create guess passcode, compares the guess passcode against the game passcode and store comparison results.
-        Passcode guess_passcode = Passcode.createGuessPasscode(this.passcode_length, guess_array);
-        int[] comparison_result = this.game_passcode.comparePasscode(guess_passcode);
+        Passcode guessPasscode = Passcode.createGuessPasscode(this.passcodeLength, guessArray);
+        int[] comparisonResult = this.gamePasscode.comparePasscode(guessPasscode);
 
         // Adds guess passcode and the comparison results to their respective lists.
-        guess_history.add(guess_passcode);
-        guess_results.add(comparison_result);
+        guessList.add(guessPasscode);
+        resultsList.add(comparisonResult);
 
         // Check for correct guess.
-        if ( comparison_result[0] == this.passcode_length ) {
-            this.game_end = true;
-            this.correct_guess = true;
+        if ( comparisonResult[0] == this.passcodeLength) {
+            this.continueGame = false;
+            this.correctGuess = true;
         }
 
         // Check for game limit.
-        if ( game_round == game_limit ) {
-            this.game_end = true;
+        if ( gameRound == gameLimit) {
+            this.continueGame = false;
         }
 
-        this.game_round += 1;
+        this.gameRound += 1;
     }
 
     /**
@@ -61,27 +61,27 @@ public class Game {
      * Guesses remaining: Game Limit - Current Round
      */
     public String getGameStatus(){
-        StringBuilder game_status = new StringBuilder();
+        StringBuilder gameStatus = new StringBuilder();
 
-        if ( this.game_round == 0 ) {
-            game_status.append("\nWelcome to Mastermind!\n");
-            game_status.append("\nColors: red, yellow, green, blue\n");
+        if ( this.gameRound == 0 ) {
+            gameStatus.append("\nWelcome to Mastermind!\n");
+            gameStatus.append("\nColors: red, yellow, green, blue\n");
         } else {
-            game_status.append(" Guesses so far: ").append(this.game_round).append("\n\n");
+            gameStatus.append(" Guesses so far: ").append(this.gameRound).append("\n\n");
 
-            for (int i = 0; i < this.game_round; i++ ) {
-                game_status.append(this.guess_history.get(i).toString())
+            for (int i = 0; i < this.gameRound; i++ ) {
+                gameStatus.append(this.guessList.get(i).toString())
                         .append("(")
-                        .append(this.guess_results.get(i)[0])
+                        .append(this.resultsList.get(i)[0])
                         .append(" correct color & place, ")
-                        .append(this.guess_results.get(i)[1])
+                        .append(this.resultsList.get(i)[1])
                         .append(" correct color only)\n");
             }
 
-            game_status.append("\n Guesses remaining: ").append(this.game_limit - this.game_round + 1).append("\n");
+            gameStatus.append("\n Guesses remaining: ").append(this.gameLimit - this.gameRound + 1).append("\n");
         }
 
-        return game_status.toString();
+        return gameStatus.toString();
     }
 
     /**
@@ -91,14 +91,14 @@ public class Game {
      * 3. User guessed incorrectly and still has guesses.
      */
     public String getResultsMessages(){
-        if ( correct_guess ) {
-            return "\nYOU WIN!! The passcode was: " + this.game_passcode.toString() + "\n";
+        if (correctGuess) {
+            return "\nYOU WIN!! The passcode was: " + this.gamePasscode.toString() + "\n";
         }
-        if ( game_end ) {
-            return "\nYOU LOSE!! The passcode was: " + this.game_passcode.toString() + "\n";
+        if ( !continueGame) {
+            return "\nYOU LOSE!! The passcode was: " + this.gamePasscode.toString() + "\n";
         }
         return "\nIncorrect! Try again!\n";
     }
 
-    public boolean checkGameEnd() { return game_end; }
+    public boolean checkGameEnd() { return continueGame; }
 }

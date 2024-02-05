@@ -32,8 +32,8 @@ public class GuessCell {
     * validate that guesses always use a valid color. Use GuessCell.createCell(color)
     * or GuessCell.createRandomCell() instead.
      */
-    private GuessCell(String given_color) {
-        this.color = given_color;
+    private GuessCell(String givenColor) {
+        this.color = givenColor;
     }
     
     
@@ -41,9 +41,9 @@ public class GuessCell {
      * Creates a new cell of the given color. Valid colors are red, yellow,
      * green, or blue. If an invalid color is provided, will instead return null.
      */
-    public static GuessCell createCell(String given_color) {
-        if ( colors.containsKey(given_color)) {
-            return new GuessCell(given_color);
+    public static GuessCell createCell(String givenColor) {
+        if ( colors.containsKey(givenColor)) {
+            return new GuessCell(givenColor);
         } else {
             System.err.println("That's not a valid color!");
             return null;
@@ -55,20 +55,20 @@ public class GuessCell {
      */
     
     public static GuessCell createRandomCell() {
-        Set<String> color_names = colors.keySet();
-        List<String> color_list = color_names.stream().toList();
-        int num_colors = color_list.size();
-        int color_num = new Random().nextInt(num_colors);
-        String target_color = color_list.get(color_num);
-        return new GuessCell(target_color);
+        Set<String> colorNames = colors.keySet();
+        List<String> colorList = colorNames.stream().toList();
+        int numColors = colorList.size();
+        int colorNum = new Random().nextInt(numColors);
+        String targetColor = colorList.get(colorNum);
+        return new GuessCell(targetColor);
     }
     
     /**
      * Checks whether a color is in the list of valid colors.
      * Returns true when the color is found, otherwise false.
      */
-    public static boolean checkColorValidity(String color_name) {
-        return colors.containsKey(color_name);
+    public static boolean checkColorValidity(String colorName) {
+        return colors.containsKey(colorName);
     }
     
     public String getColorName() {
@@ -89,7 +89,7 @@ public class GuessCell {
      */
     @Override
     public String toString() {
-        String color_code = colors.get(color);
-        return String.format("%s*%s", color_code, RESET);
+        String colorCode = colors.get(color);
+        return String.format("%s*%s", colorCode, RESET);
     }
 }
