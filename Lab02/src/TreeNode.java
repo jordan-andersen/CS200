@@ -2,6 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
 public class TreeNode {
     // ATTRIBUTES
     private final String name;
@@ -35,14 +36,21 @@ public class TreeNode {
     @Override
     public String toString() {
         StringBuilder nodeString = new StringBuilder();
-        nodeString.append("    ".repeat(Math.max(0, this.depth))).append(this.name).append("\n");
         if (isDirectory) {
+            nodeString.append("|   ".repeat(Math.max(0, this.depth)))
+                    .append("+ ")
+                    .append(this.name)
+                    .append("\n");
             for (TreeNode child : this.children) {
                 nodeString.append(child.toString());
             }
+        } else {
+            nodeString.append("|   ".repeat(Math.max(0, this.depth)))
+                    .append("- ")
+                    .append(this.name)
+                    .append("\n");
         }
         return nodeString.toString();
-
     }
 
 }
