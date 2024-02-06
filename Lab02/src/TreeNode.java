@@ -11,7 +11,6 @@ public class TreeNode {
     private final List<TreeNode> children;
 
     // METHODS
-
     public TreeNode(File path) {
         this(path,0);
     }
@@ -36,7 +35,7 @@ public class TreeNode {
     @Override
     public String toString() {
         StringBuilder nodeString = new StringBuilder();
-        if (isDirectory) {
+        if (this.isDirectory) {
             nodeString.append("|   ".repeat(Math.max(0, this.depth)))
                     .append("+ ")
                     .append(this.name)
