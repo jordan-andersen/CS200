@@ -35,21 +35,20 @@ public class TreeNode {
     @Override
     public String toString() {
         StringBuilder nodeString = new StringBuilder();
+        final String depthIndent = "|   ";
+        final String dirIndicator = "+ ";
+        final String fileIndicator = "- ";
         if (this.isDirectory) {
-            nodeString.append("|   ".repeat(Math.max(0, this.depth)))
-                    .append("+ ")
-                    .append(this.name)
-                    .append("\n");
+            nodeString.append(depthIndent.repeat(Math.max(0, this.depth)))
+                    .append(dirIndicator).append(this.name).append("\n");
             for (TreeNode child : this.children) {
                 nodeString.append(child.toString());
             }
         } else {
-            nodeString.append("|   ".repeat(Math.max(0, this.depth)))
-                    .append("- ")
-                    .append(this.name)
-                    .append("\n");
+            nodeString.append(depthIndent.repeat(Math.max(0, this.depth)))
+                    .append(fileIndicator).append(this.name).append("\n");
+
         }
         return nodeString.toString();
     }
-
 }
