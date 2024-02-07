@@ -20,17 +20,18 @@ public class TreeNode {
         this.isDirectory = path.isDirectory();
         this.depth = depth;
         this.children = new ArrayList<>();
+
         if (path.isDirectory()) {
             for (File child : path.listFiles() ) {
                 if (child != null) {
-                    this.children.add(new TreeNode(child, depth+1));
+                    children.add(new TreeNode(child, depth+1));
                 }
             }
         }
-        this.children.sort(Comparator.comparing(TreeNode::getName));
+        children.sort(Comparator.comparing(TreeNode::getName));
     }
 
-    public String getName() { return this.name; }
+    public String getName() { return name; }
 
     @Override
     public String toString() {
@@ -38,15 +39,15 @@ public class TreeNode {
         final String depthIndent = "|   ";
         final String dirIndicator = "+ ";
         final String fileIndicator = "- ";
-        if (this.isDirectory) {
-            nodeString.append(depthIndent.repeat(Math.max(0, this.depth)))
-                    .append(dirIndicator).append(this.name).append("\n");
-            for (TreeNode child : this.children) {
+        if (isDirectory) {
+            nodeString.append(depthIndent.repeat(Math.max(0, depth)))
+                    .append(dirIndicator).append(name).append("\n");
+            for (TreeNode child : children) {
                 nodeString.append(child.toString());
             }
         } else {
-            nodeString.append(depthIndent.repeat(Math.max(0, this.depth)))
-                    .append(fileIndicator).append(this.name).append("\n");
+            nodeString.append(depthIndent.repeat(Math.max(0, depth)))
+                    .append(fileIndicator).append(name).append("\n");
 
         }
         return nodeString.toString();
