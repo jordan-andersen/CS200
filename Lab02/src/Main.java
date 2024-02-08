@@ -9,14 +9,19 @@ public class Main {
         while (continueProgram) {
             System.out.print("Enter a path to map: ");
             String path = userInput.nextLine().strip();
+            File parentDirectory = new File(path);
+            boolean isDirectory = parentDirectory.isDirectory();
+            boolean directoryExists = parentDirectory.exists();
 
             if (path.equalsIgnoreCase("quit")) {
                 continueProgram = false;
-            } else {
-                File parentDirectory = new File(path);
+            } else if (isDirectory && directoryExists) {
                 TreeNode parentNode = new TreeNode(parentDirectory);
                 System.out.println("\n" + parentNode);
+            } else {
+                System.out.println("\nInvalid input\n");
             }
         }
+        userInput.close();
     }
 }
