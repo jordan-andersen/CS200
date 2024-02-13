@@ -9,7 +9,11 @@ public class TreeNode {
     // METHODS
     protected TreeNode(File path, TreeNode parent) {
         this.name = path.getName();
-        this.parent = parent;
+        if (parent == null) {
+            this.parent = this;
+        } else {
+            this.parent = parent;
+        }
     }
 
     public static TreeNode createNode(File path) {
@@ -27,7 +31,7 @@ public class TreeNode {
     }
 
     public int getDepth() {
-        if (parent == null) {
+        if (parent == this) {
             return 0;
         }
         return 1 + parent.getDepth();
