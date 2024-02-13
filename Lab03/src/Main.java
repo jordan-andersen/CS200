@@ -2,17 +2,26 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Main {
+    // PROGRAM FORMAT CONSTANTS
+    static final String DEPTH_INDENT = "|   ";
+    static final String FILE_INDICATOR = "- ";
+    static final String DIR_INDICATOR = "+ ";
+
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         boolean continueProgram = true;
 
         while (continueProgram) {
+            // USER PROMPT AND INPUT
             System.out.print("Enter a path to map: ");
             String path = userInput.nextLine().strip();
+
+            // INPUT VALIDATION
             File rootDirectory = new File(path);
             boolean isDirectory = rootDirectory.isDirectory();
             boolean directoryExists = rootDirectory.exists();
 
+            // INPUT LOGIC
             if (path.equalsIgnoreCase("quit")) {
                 continueProgram = false;
             } else if (isDirectory && directoryExists) {
