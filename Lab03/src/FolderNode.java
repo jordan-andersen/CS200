@@ -22,7 +22,8 @@ public class FolderNode extends TreeNode {
 
     @Override
     public String toString() {
-        String nodeString = Main.DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + Main.DIR_INDICATOR + name + "\n";
+        String nodeString = TreeNode.DEPTH_INDENT.repeat(Math.max(0, this.getDepth()))
+                + TreeNode.DIR_INDICATOR + name + "\n";
         for (TreeNode child : children) { nodeString += child.toString(); }
         return nodeString;
     }

@@ -1,6 +1,11 @@
 import java.io.File;
 
 public class TreeNode {
+    // PROGRAM FORMAT CONSTANTS
+    static final String DEPTH_INDENT = "|   ";
+    static final String FILE_INDICATOR = "- ";
+    static final String DIR_INDICATOR = "+ ";
+
     // ATTRIBUTES
     protected final String name;
     protected final TreeNode parent;
@@ -37,6 +42,6 @@ public class TreeNode {
 
     @Override
     public String toString() {
-        return Main.DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + Main.FILE_INDICATOR + name + "\n";
+        return TreeNode.DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + TreeNode.FILE_INDICATOR + name + "\n";
     }
 }
