@@ -20,7 +20,6 @@ public class FolderNode extends TreeNode {
             for (File child : childFiles) {
                 if (child != null) { children.add(TreeNode.createNode(child, this)); }
             }
-            // children.sort(Comparator.comparing(TreeNode::getName));
             children.sort((a, b) -> {
                 boolean aIsFolder = a instanceof FolderNode;
                 boolean bIsFolder = b instanceof FolderNode;
