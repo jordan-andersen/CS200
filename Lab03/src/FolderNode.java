@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class FolderNode extends TreeNode {
+    // PROGRAM FORMAT CONSTANTS
+    static final String FOLDER_INDICATOR = "+ ";
+
     // ATTRIBUTES
     private final List<TreeNode> children;
 
@@ -22,7 +25,7 @@ public class FolderNode extends TreeNode {
 
     @Override
     public String toString() {
-        String nodeString = Main.DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + Main.DIR_INDICATOR + name + "\n";
+        String nodeString = DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + FOLDER_INDICATOR + name + "\n";
         for (TreeNode child : children) { nodeString += child.toString(); }
         return nodeString;
     }

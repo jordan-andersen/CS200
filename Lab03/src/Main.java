@@ -2,11 +2,6 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Main {
-    // PROGRAM FORMAT CONSTANTS
-    static final String DEPTH_INDENT = "|   ";
-    static final String FILE_INDICATOR = "- ";
-    static final String DIR_INDICATOR = "+ ";
-
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         boolean continueProgram = true;
