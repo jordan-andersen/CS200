@@ -8,16 +8,19 @@ public class TreeNode {
     // METHODS
     protected TreeNode(File path, TreeNode parent) {
         this.name = path.getName();
-        if (parent == null) { this.parent = this; }
-        else { this.parent = parent; }
+        if (parent == null) {
+            this.parent = this;
+        } else {
+            this.parent = parent;
+        }
     }
 
-    // Constructor, used to create the Root Folder-node.
+    // Factory method, creates the Root Folder-node.
     public static TreeNode createNode(File path) {
         return new FolderNode(path, null);
     }
 
-    // Constructor, determines whether to create a Folder-node, for a directory, or a Tree-node, for a file.
+    // Factory method, determines whether to create a Folder-node, for a directory, or a Tree-node, for a file.
     public static TreeNode createNode(File path, TreeNode parent) {
         if ( path.isDirectory() ) { return new FolderNode(path, parent); }
         return new TreeNode(path, parent);
