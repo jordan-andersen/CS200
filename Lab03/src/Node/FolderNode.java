@@ -1,6 +1,7 @@
 package Node;
 
 import java.io.File;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,18 +21,22 @@ public class FolderNode extends TreeNode {
             for (File child : childFiles) {
                 if (child != null) { children.add(TreeNode.createNode(child, this)); }
             }
-            children.sort((a, b) -> {
-                boolean aIsFolder = a instanceof FolderNode;
-                boolean bIsFolder = b instanceof FolderNode;
-                if (aIsFolder && !bIsFolder) {
-                    return -1;
-                } else if (!aIsFolder && bIsFolder) {
-                    return 1;
-                } else {
-                    return a.name.compareTo(b.name);
-                }
-            });
+            children.sort(nodeComparator());
         }
+    }
+
+    private static Comparator<TreeNode> nodeComparator() {
+        return (a, b) -> {
+            boolean aIsFolder = a instanceof FolderNode;
+            boolean bIsFolder = b instanceof FolderNode;
+            if (aIsFolder && !bIsFolder) {
+                return -1;
+            } else if (!aIsFolder && bIsFolder) {
+                return 1;
+            } else {
+                return a.name.compareTo(b.name);
+            }
+        };
     }
 
     @Override
