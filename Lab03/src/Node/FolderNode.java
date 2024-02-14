@@ -3,7 +3,6 @@ package Node;
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class FolderNode extends TreeNode {
     // PROGRAM FORMAT CONSTANTS
@@ -21,13 +20,24 @@ public class FolderNode extends TreeNode {
             for (File child : childFiles) {
                 if (child != null) { children.add(TreeNode.createNode(child, this)); }
             }
-            children.sort(Comparator.comparing(TreeNode::getName));
+            // children.sort(Comparator.comparing(TreeNode::getName));
+            children.sort((a, b) -> {
+                boolean aIsFolder = a instanceof FolderNode;
+                boolean bIsFolder = b instanceof FolderNode;
+                if (aIsFolder && !bIsFolder) {
+                    return -1;
+                } else if (!aIsFolder && bIsFolder) {
+                    return 1;
+                } else {
+                    return a.name.compareTo(b.name);
+                }
+            });
         }
     }
 
     @Override
     public String toString() {
-        String nodeString = DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + FOLDER_INDICATOR + name + "\n";
+        String nodeString = DEPTH_INDENT.repeat(this.getDepth()) + FOLDER_INDICATOR + name + "\n";
         for (TreeNode child : children) { nodeString += child.toString(); }
         return nodeString;
     }

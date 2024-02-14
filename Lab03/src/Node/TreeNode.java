@@ -38,11 +38,8 @@ public class TreeNode {
         return 1 + parent.getDepth();
     }
 
-    // Getter for comparator sort function.
-    public String getName() { return name; }
-
     @Override
     public String toString() {
-        return DEPTH_INDENT.repeat(Math.max(0, this.getDepth())) + FILE_INDICATOR + name + "\n";
+        return DEPTH_INDENT.repeat(this.getDepth()) + FILE_INDICATOR + name + "\n";
     }
 }
