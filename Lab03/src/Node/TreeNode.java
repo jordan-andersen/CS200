@@ -1,3 +1,5 @@
+package Node;
+
 import java.io.File;
 
 public class TreeNode {
@@ -30,7 +32,7 @@ public class TreeNode {
         return new TreeNode(path, parent);
     }
 
-    // Recursive function that calculates depth.
+    // Recursive function that calculates node depth.
     public int getDepth() {
         if (parent == this) { return 0; }
         return 1 + parent.getDepth();

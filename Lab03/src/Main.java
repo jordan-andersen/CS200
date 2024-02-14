@@ -1,10 +1,11 @@
+import Node.TreeNode;
 import java.io.File;
 import java.util.Scanner;
 
 public class Main {
     // STRING CONSTANTS
-    static final String USER_QUIT = "quit";
     static final String USER_PROMPT = "Enter a path to map: ";
+    static final String USER_QUIT = "quit";
     static final String INVALID_INPUT_ERROR = "\nInvalid input!\n";
 
     public static void main(String[] args) {
