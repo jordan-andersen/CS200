@@ -25,6 +25,7 @@ public class FolderNode extends TreeNode {
         }
     }
 
+    // Sorts children list by type then by name.
     private static Comparator<TreeNode> nodeComparator() {
         return (a, b) -> {
             boolean aIsFolder = a instanceof FolderNode;

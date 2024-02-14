@@ -12,13 +12,11 @@ public class TreeNode {
     protected final TreeNode parent;
 
     // METHODS
+    // Constructor, utilizes ternary if-else statement to assign parent value.
+    // If passed value is null, assign parent as self, else assign parent to passed value.
     protected TreeNode(File path, TreeNode parent) {
         this.name = path.getName();
-        if (parent == null) {
-            this.parent = this;
-        } else {
-            this.parent = parent;
-        }
+        this.parent = parent == null ? this : parent;
     }
 
     // Factory method, creates the Root Folder-node.
@@ -27,9 +25,10 @@ public class TreeNode {
     }
 
     // Factory method, determines whether to create a Folder-node, for a directory, or a Tree-node, for a file.
+    // Utilizes ternary if-else statement to control which type of node is created:
+    // If path is a directory, create FolderNode, else create TreeNode.
     public static TreeNode createNode(File path, TreeNode parent) {
-        if ( path.isDirectory() ) { return new FolderNode(path, parent); }
-        return new TreeNode(path, parent);
+        return path.isDirectory() ? new FolderNode(path, parent) : new TreeNode(path, parent);
     }
 
     // Recursive function that calculates node depth.
