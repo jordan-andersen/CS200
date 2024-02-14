@@ -11,10 +11,13 @@ public class FolderNode extends TreeNode {
     protected FolderNode(File path, TreeNode parent) {
         super(path, parent);
         this.children = new ArrayList<>();
-        for (File child : path.listFiles() ) {
-            if (child != null) { children.add(TreeNode.createNode(child, this)); }
+        File[] childFiles = path.listFiles();
+        if (childFiles != null ) {
+            for (File child : childFiles) {
+                if (child != null) { children.add(TreeNode.createNode(child, this)); }
+            }
+            children.sort(Comparator.comparing(TreeNode::getName));
         }
-        children.sort(Comparator.comparing(TreeNode::getName));
     }
 
     @Override
