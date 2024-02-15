@@ -39,6 +39,6 @@ public class TreeNode {
 
     @Override
     public String toString() {
-        return DEPTH_INDENT.repeat(this.getDepth()) + FILE_INDICATOR + name + "\n";
+        return DEPTH_INDENT.repeat(getDepth()) + FILE_INDICATOR + name + "\n";
     }
 }

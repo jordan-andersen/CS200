@@ -42,7 +42,7 @@ public class FolderNode extends TreeNode {
 
     @Override
     public String toString() {
-        String nodeString = DEPTH_INDENT.repeat(this.getDepth()) + FOLDER_INDICATOR + name + "\n";
+        String nodeString = DEPTH_INDENT.repeat(getDepth()) + FOLDER_INDICATOR + name + "\n";
         for (TreeNode child : children) { nodeString += child.toString(); }
         return nodeString;
     }
