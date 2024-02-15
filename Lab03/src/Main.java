@@ -1,4 +1,4 @@
-import Node.TreeNode;
+import node.TreeNode;
 import java.io.File;
 import java.util.Scanner;
 
