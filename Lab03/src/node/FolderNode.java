@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class FolderNode extends TreeNode {
     // STRING CONSTANTS
-    protected static final String FOLDER_INDICATOR = "+ ";
+    private static final String FOLDER_INDICATOR = "+ ";
 
     // CHILDREN COMPARATOR
-    protected static final Comparator<TreeNode> NODE_COMPARATOR = (a, b) -> {
+    private static final Comparator<TreeNode> NODE_COMPARATOR = (a, b) -> {
         boolean aIsFolder = a instanceof FolderNode;
         boolean bIsFolder = b instanceof FolderNode;
         if (aIsFolder && !bIsFolder) {
