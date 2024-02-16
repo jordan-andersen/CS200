@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Main {
     // STRING CONSTANTS
-    static final String USER_PROMPT = "Enter a path to map: ";
-    static final String USER_QUIT = "quit";
-    static final String INVALID_INPUT_ERROR = "\nInvalid input!\n";
+    private static final String USER_PROMPT = "Enter a path to map: ";
+    private static final String USER_QUIT = "quit";
+    private static final String INVALID_INPUT_ERROR = "\nInvalid input!\n";
 
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);

@@ -6,8 +6,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class FolderNode extends TreeNode {
-    // PROGRAM FORMAT CONSTANTS
-    static final String FOLDER_INDICATOR = "+ ";
+    // STRING CONSTANTS
+    protected static final String FOLDER_INDICATOR = "+ ";
+
+    // CHILDREN COMPARATOR
+    protected static final Comparator<TreeNode> NODE_COMPARATOR = (a, b) -> {
+        boolean aIsFolder = a instanceof FolderNode;
+        boolean bIsFolder = b instanceof FolderNode;
+        if (aIsFolder && !bIsFolder) {
+            return -1;
+        } else if (!aIsFolder && bIsFolder) {
+            return 1;
+        } else {
+            return a.name.compareTo(b.name);
+        }
+    };
 
     // ATTRIBUTES
     private final List<TreeNode> children;
@@ -21,23 +34,8 @@ public class FolderNode extends TreeNode {
             for (File child : childFiles) {
                 if (child != null) { children.add(TreeNode.createNode(child, this)); }
             }
-            children.sort(nodeComparator());
+            children.sort(NODE_COMPARATOR);
         }
-    }
-
-    // Sorts children list by type then by name.
-    private static Comparator<TreeNode> nodeComparator() {
-        return (a, b) -> {
-            boolean aIsFolder = a instanceof FolderNode;
-            boolean bIsFolder = b instanceof FolderNode;
-            if (aIsFolder && !bIsFolder) {
-                return -1;
-            } else if (!aIsFolder && bIsFolder) {
-                return 1;
-            } else {
-                return a.name.compareTo(b.name);
-            }
-        };
     }
 
     @Override

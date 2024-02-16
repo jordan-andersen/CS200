@@ -3,9 +3,9 @@ package node;
 import java.io.File;
 
 public class TreeNode {
-    // PROGRAM FORMAT CONSTANTS
-    static final String DEPTH_INDENT = "|   ";
-    static final String FILE_INDICATOR = "- ";
+    // STRING CONSTANTS
+    protected static final String DEPTH_INDENT = "|   ";
+    protected static final String FILE_INDICATOR = "- ";
 
     // ATTRIBUTES
     protected final String name;
