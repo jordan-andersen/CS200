@@ -24,14 +24,13 @@ public class TreeNode {
         return new FolderNode(path, null);
     }
 
-    // Factory method, determines whether to create a Folder-node, for a directory, or a Tree-node, for a file.
-    // Utilizes ternary if-else statement to control which type of node is created:
+    // Factory method, utilizes ternary if-else statement to control which type of node is created:
     // If path is a directory, create FolderNode, else create TreeNode.
     public static TreeNode createNode(File path, TreeNode parent) {
         return path.isDirectory() ? new FolderNode(path, parent) : new TreeNode(path, parent);
     }
 
-    // Recursive function that calculates node depth.
+    // Recursive method that calculates node depth.
     public int getDepth() {
         if (parent == this) { return 0; }
         return 1 + parent.getDepth();
