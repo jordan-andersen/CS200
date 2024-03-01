@@ -2,12 +2,14 @@ package token;
 
 public abstract class Token {
     public static Token parse(String expression) {
+        expression = checkParentheses(expression) ? processParentheses(expression) : expression;
+
         // Find the lowest precedence operator
         int i = getOperatorIndex(expression);
         int j =  expression.length();
 
         if (i != -1) {
-            // Split the expr and recursively parse
+            // Split the expression at the operator index based on if those sub-expressions are bracketed by parentheses
             boolean leftParentheses = checkParentheses(expression.substring(0, i));
             boolean rightParentheses = checkParentheses(expression.substring(i+1, j));
 
@@ -62,8 +64,33 @@ public abstract class Token {
         return operatorIndex;
     }
 
+    private static String processParentheses(String expression) {
+        int j = expression.length();
+        int total = 0;
+        int count = 0;
+        int max = 0;
+        for (int i = 0; i < j; i++) {
+            char c = expression.charAt(i);
+            if (c == '(') {
+                count ++;
+                total ++;
+            }
+            if (c == ')') {
+                count --;
+                total ++;
+            }
+            if (max < count) {
+                max = count;
+            }
+        }
+        if (max == 1 && total > 2) {
+            return expression;
+        }
+        return expression.substring(1, j-1);
+    }
+
     private static boolean checkParentheses(String expression) {
-        return expression.length() > 1 && expression.charAt(0) == '(' && expression.charAt(expression.length() - 1) == ')';
+        return expression.startsWith("(") && expression.endsWith(")");
     }
 
     public abstract double eval();

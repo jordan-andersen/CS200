@@ -1,13 +1,12 @@
 import token.Token;
-
 import java.util.Scanner;
 
 public class Main {
     // STRING CONSTANTS
     private static final String USER_PROMPT = "Input arithmetic expression to evaluate: ";
     private static final String USER_QUIT = "quit";
-    private  static final String GIVEN_STRING = "\nGiven: ";
-    private static final String RESULT_STRING = "Token Result: ";
+    private static final String GIVEN_STRING = "\nGiven: ";
+    private static final String RESULT_STRING = "Result: ";
     private static final String INVALID_INPUT_ERROR = "\nInvalid input!\n";
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
@@ -16,9 +15,6 @@ public class Main {
         while (continueProgram) {
             System.out.println(USER_PROMPT);
             String expression = userInput.nextLine().replaceAll("\\s+", "");
-
-            //
-
 
             if (expression.equalsIgnoreCase(USER_QUIT)) {
                 continueProgram = false;
