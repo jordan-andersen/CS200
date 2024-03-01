@@ -1,6 +1,6 @@
 package token;
 
-public class DivToken extends OpToken {
+public class DivToken extends OperatorToken {
     protected DivToken(Token leftToken, Token rightToken) { super(leftToken, rightToken); }
 
     @Override

@@ -1,9 +1,9 @@
 package token;
 
-public class NumToken extends Token {
+public class NumberToken extends Token {
     protected final double value;
 
-    protected NumToken(double value) {
+    protected NumberToken(double value) {
         this.value = value;
     }
 

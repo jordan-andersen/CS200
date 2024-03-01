@@ -1,10 +1,10 @@
 package token;
 
-public class ParaToken extends Token {
+public class ParenthesesToken extends Token {
 
     protected final Token token;
 
-    protected ParaToken(Token token) {
+    protected ParenthesesToken(Token token) {
         this.token = token;
     }
 

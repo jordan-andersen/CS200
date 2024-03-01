@@ -14,8 +14,8 @@ public abstract class Token {
             String rightString = expression.substring(operatorIndex+1);
 
             // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
-            Token leftToken = checkParentheses(leftString) ? new ParaToken(parse(leftString)) : parse(leftString);
-            Token rightToken = checkParentheses(rightString) ? new ParaToken(parse(rightString)) : parse(rightString);
+            Token leftToken = checkParentheses(leftString) ? new ParenthesesToken(parse(leftString)) : parse(leftString);
+            Token rightToken = checkParentheses(rightString) ? new ParenthesesToken(parse(rightString)) : parse(rightString);
 
             // Create appropriate Operator token
             switch (expression.charAt(operatorIndex)) {
@@ -30,7 +30,7 @@ public abstract class Token {
             }
         }
         // Parse as a number if no operator found.
-        return new NumToken(Double.parseDouble(expression));
+        return new NumberToken(Double.parseDouble(expression));
     }
 
     private static int getOperatorIndex(String expression) {
