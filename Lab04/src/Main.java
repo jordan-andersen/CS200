@@ -7,7 +7,7 @@ public class Main {
     private static final String USER_QUIT = "quit";
     private static final String GIVEN_STRING = "\nGiven: ";
     private static final String RESULT_STRING = "Result: ";
-    private static final String INVALID_INPUT_ERROR = "\nInvalid input!\n";
+    private static final String INVALID_INPUT_ERROR = "\nInvalid input: unable to parse!\n";
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         boolean continueProgram = true;
@@ -21,9 +21,9 @@ public class Main {
             } else if (!expression.matches("[0-9+\\-*/().]+")) {
                 System.out.println(INVALID_INPUT_ERROR);
             } else {
-                Token tokenResult = Token.parse(expression);
-                System.out.println(GIVEN_STRING + tokenResult);
-                System.out.println(RESULT_STRING + tokenResult.eval() + "\n");
+                Token result = Token.parse(expression);
+                System.out.println(GIVEN_STRING + result);
+                System.out.println(RESULT_STRING + result.eval() + "\n");
             }
         }
     }

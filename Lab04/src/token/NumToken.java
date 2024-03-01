@@ -8,13 +8,9 @@ public class NumToken extends Token {
     }
 
     @Override
-    public double eval() {
-        return value;
-    }
+    public double eval() { return value; }
 
     @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
+    public String toString() { return String.valueOf(value); }
 
 }

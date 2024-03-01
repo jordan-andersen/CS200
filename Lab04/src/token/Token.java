@@ -31,7 +31,7 @@ public abstract class Token {
                     return new DivToken(leftToken, rightToken);
             }
         }
-        // Parse as a single number if no operator found.
+        // Parse as a number if no operator found.
         return new NumToken(Double.parseDouble(expression));
     }
 
@@ -39,20 +39,23 @@ public abstract class Token {
         int precedenceValue = 0;
         int operatorIndex = -1;
         int parenthesisCount = 0;
-        boolean isPreviousDigit;
+        boolean isPreviousDigit = false;
+        boolean isPreviousClosedParentheses = false;
+        boolean notNegativeNumber;
 
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
-            isPreviousDigit = Character.isDigit(c);
+            notNegativeNumber = isPreviousClosedParentheses || isPreviousDigit;
 
             if ( c == '(' ) {
                 parenthesisCount++;
             } else if ( c == ')' ) {
                 parenthesisCount--;
+                isPreviousClosedParentheses = true;
             }
 
             if (parenthesisCount == 0) {
-                if ((c == '+' || (c == '-' && isPreviousDigit) ) && precedenceValue != 1) {
+                if ((c == '+' || (c == '-' && notNegativeNumber) ) && precedenceValue != 1) {
                     precedenceValue = 1;
                     operatorIndex = i;
                 } else if ((c == '*' || c == '/') && precedenceValue != 1) {
@@ -60,6 +63,8 @@ public abstract class Token {
                     operatorIndex = i;
                 }
             }
+
+            isPreviousDigit = Character.isDigit(c);
         }
         return operatorIndex;
     }

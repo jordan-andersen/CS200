@@ -9,10 +9,8 @@ public class ParaToken extends Token {
     }
 
     @Override
-    public double eval() {
-        return token.eval();
-    }
+    public double eval() { return token.eval(); }
 
     @Override
-    public String toString() {return "( " + token.toString() + " )"; }
+    public String toString() { return "( " + token.toString() + " )"; }
 }
