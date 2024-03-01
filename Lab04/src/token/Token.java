@@ -2,25 +2,23 @@ package token;
 
 public abstract class Token {
     public static Token parse(String expression) {
+        // Removes parentheses as necessary
         expression = checkParentheses(expression) ? processParentheses(expression) : expression;
 
         // Find the lowest precedence operator
-        int i = getOperatorIndex(expression);
-        int j =  expression.length();
+        int operatorIndex = getOperatorIndex(expression);
 
-        if (i != -1) {
-            // Split the expression at the operator index based on if those sub-expressions are bracketed by parentheses
-            boolean leftParentheses = checkParentheses(expression.substring(0, i));
-            boolean rightParentheses = checkParentheses(expression.substring(i+1, j));
+        if (operatorIndex != -1) {
+            // Split the expression at the operator index
+            String leftString = expression.substring(0, operatorIndex);
+            String rightString = expression.substring(operatorIndex+1);
 
-            String leftString = leftParentheses ? expression.substring(1, i-1) : expression.substring(0, i);
-            String rightString = rightParentheses ? expression.substring(i+2, j-1) : expression.substring(i+1, j);
-
-            Token leftToken = leftParentheses ? new ParaToken(parse(leftString)) : parse(leftString);
-            Token rightToken = rightParentheses ? new ParaToken(parse(rightString)) : parse(rightString);
+            // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
+            Token leftToken = checkParentheses(leftString) ? new ParaToken(parse(leftString)) : parse(leftString);
+            Token rightToken = checkParentheses(rightString) ? new ParaToken(parse(rightString)) : parse(rightString);
 
             // Create appropriate Operator token
-            switch (expression.charAt(i)) {
+            switch (expression.charAt(operatorIndex)) {
                 case '+':
                     return new AddToken(leftToken, rightToken);
                 case '-':
@@ -70,33 +68,21 @@ public abstract class Token {
     }
 
     private static String processParentheses(String expression) {
-        int j = expression.length();
-        int total = 0;
-        int count = 0;
-        int max = 0;
-        for (int i = 0; i < j; i++) {
+        int parenthesesLevel = 0;
+        for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             if (c == '(') {
-                count ++;
-                total ++;
-            }
-            if (c == ')') {
-                count --;
-                total ++;
-            }
-            if (max < count) {
-                max = count;
+                parenthesesLevel++;
+            } else if (c == ')') {
+                parenthesesLevel--;
+            } else if (parenthesesLevel == 0 && (c == '+' || c == '-' || c == '*' || c == '/')) {
+                return expression;
             }
         }
-        if (max == 1 && total > 2) {
-            return expression;
-        }
-        return expression.substring(1, j-1);
+        return expression.substring(1,expression.length()-1);
     }
 
-    private static boolean checkParentheses(String expression) {
-        return expression.startsWith("(") && expression.endsWith(")");
-    }
+    private static boolean checkParentheses(String s) { return s.startsWith("(") && s.endsWith(")"); }
 
     public abstract double eval();
 
