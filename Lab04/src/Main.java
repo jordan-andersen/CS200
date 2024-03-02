@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     // STRING CONSTANTS
-    private static final String USER_PROMPT = "Input arithmetic expression to evaluate: ";
+    private static final String USER_PROMPT = "Input arithmetic expression to evaluate (or 'quit' to exit): ";
     private static final String USER_QUIT = "quit";
     private static final String GIVEN_STRING = "\nGiven: ";
     private static final String RESULT_STRING = "Result: ";
