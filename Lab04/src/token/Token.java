@@ -1,6 +1,8 @@
 package token;
 
 public abstract class Token {
+    public static boolean DEBUG_MODE = false;
+    public static boolean VERBOSE_MODE = false;
     public static Token parse(String expression) {
         // Removes parentheses as necessary
         expression = checkParentheses(expression) ? processParentheses(expression) : expression;
@@ -12,6 +14,7 @@ public abstract class Token {
             // Split the expression at the operator index
             String leftString = expression.substring(0, operatorIndex);
             String rightString = expression.substring(operatorIndex+1);
+            if (DEBUG_MODE) { System.out.println(leftString + " | " + rightString); }
 
             // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
             Token leftToken = checkParentheses(leftString) ? new ParenToken(parse(leftString)) : parse(leftString);
@@ -89,6 +92,10 @@ public abstract class Token {
     }
 
     private static boolean checkParentheses(String s) { return s.startsWith("(") && s.endsWith(")"); }
+
+    public static void setDebugMode(boolean b) { DEBUG_MODE = b; }
+
+    public static void setVerboseMode(boolean b) { VERBOSE_MODE = b; }
 
     public abstract double eval();
 

@@ -6,6 +6,7 @@ public class ParenToken extends Token {
 
     protected ParenToken(Token token) {
         this.token = token;
+        if (DEBUG_MODE) { System.out.println("Creating PAREN-TOKEN: ( " + token + " )"); }
     }
 
     @Override

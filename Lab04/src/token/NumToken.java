@@ -5,6 +5,7 @@ public class NumToken extends Token {
 
     protected NumToken(double value) {
         this.value = value;
+        if (DEBUG_MODE) { System.out.println("Creating NUM-TOKEN: " + value); }
     }
 
     @Override
