@@ -4,7 +4,6 @@ public abstract class Token {
     public static Token parse(String expression) {
         // Removes parentheses as necessary
         expression = checkParentheses(expression) ? processParentheses(expression) : expression;
-
         // Find the lowest precedence operator
         int operatorIndex = getOperatorIndex(expression);
 
@@ -44,24 +43,22 @@ public abstract class Token {
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             notNegativeNumber = isPreviousClosedParentheses || isPreviousDigit;
-
-            if ( c == '(' ) {
-                parenthesisCount++;
-            } else if ( c == ')' ) {
-                parenthesisCount--;
-                isPreviousClosedParentheses = true;
-            }
-
+            if (c =='(') { parenthesisCount++ ; }
             if (parenthesisCount == 0) {
-                if ((c == '+' || (c == '-' && notNegativeNumber) ) && precedenceValue != 1) {
-                    precedenceValue = 1;
-                    operatorIndex = i;
-                } else if ((c == '*' || c == '/') && precedenceValue != 1) {
+                if (c == '*' || c == '/') {
+                    if (precedenceValue <=1) {
+                        precedenceValue = 1;
+                        operatorIndex = i;
+                    }
+                } else if (c == '+' || (c == '-' && notNegativeNumber)) {
                     precedenceValue = 2;
                     operatorIndex = i;
                 }
             }
-
+            if ( c ==')' ) {
+                parenthesisCount--;
+                isPreviousClosedParentheses = true;
+            }
             isPreviousDigit = Character.isDigit(c);
         }
         return operatorIndex;
