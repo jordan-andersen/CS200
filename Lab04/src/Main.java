@@ -22,7 +22,7 @@ public class Main {
                 continueProgram = false;
             } else if (expression.contains(")(")){
                 System.out.println(PARENTHESES_ERROR);
-            } else if (!expression.matches("[0-9+\\-*/().]+")) {
+            } else if (!expression.matches("[0-9+\\-*/()^.]+")) {
                 System.out.println(INVALID_INPUT_ERROR);
             } else {
                 Token result = Token.parse(expression);

@@ -4,6 +4,7 @@ public abstract class Token {
     public static Token parse(String expression) {
         // Removes parentheses as necessary
         expression = checkParentheses(expression) ? processParentheses(expression) : expression;
+
         // Find the lowest precedence operator
         int operatorIndex = getOperatorIndex(expression);
 
@@ -13,8 +14,8 @@ public abstract class Token {
             String rightString = expression.substring(operatorIndex+1);
 
             // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
-            Token leftToken = checkParentheses(leftString) ? new ParenthesesToken(parse(leftString)) : parse(leftString);
-            Token rightToken = checkParentheses(rightString) ? new ParenthesesToken(parse(rightString)) : parse(rightString);
+            Token leftToken = checkParentheses(leftString) ? new ParenToken(parse(leftString)) : parse(leftString);
+            Token rightToken = checkParentheses(rightString) ? new ParenToken(parse(rightString)) : parse(rightString);
 
             // Create appropriate Operator token
             switch (expression.charAt(operatorIndex)) {
@@ -26,26 +27,32 @@ public abstract class Token {
                     return new MulToken(leftToken, rightToken);
                 case '/':
                     return new DivToken(leftToken, rightToken);
+                case '^':
+                    return new ExpToken(leftToken, rightToken);
             }
         }
         // Parse as a number if no operator found.
-        return new NumberToken(Double.parseDouble(expression));
+        return new NumToken(Double.parseDouble(expression));
     }
 
     private static int getOperatorIndex(String expression) {
         int precedenceValue = 0;
         int operatorIndex = -1;
         int parenthesisCount = 0;
+        // Booleans necessary for negative number support: a subtraction will always follow a digit or parentheses.
         boolean isPreviousDigit = false;
         boolean isPreviousClosedParentheses = false;
-        boolean notNegativeNumber;
 
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
-            notNegativeNumber = isPreviousClosedParentheses || isPreviousDigit;
+            boolean notNegativeNumber = isPreviousClosedParentheses || isPreviousDigit;
             if (c =='(') { parenthesisCount++ ; }
             if (parenthesisCount == 0) {
-                if (c == '*' || c == '/') {
+                if (c == '^') {
+                    if (precedenceValue == 0) {
+                        operatorIndex = i;
+                    }
+                } else if (c == '*' || c == '/') {
                     if (precedenceValue <=1) {
                         precedenceValue = 1;
                         operatorIndex = i;
@@ -72,10 +79,12 @@ public abstract class Token {
                 parenthesesLevel++;
             } else if (c == ')') {
                 parenthesesLevel--;
-            } else if (parenthesesLevel == 0 && (c == '+' || c == '-' || c == '*' || c == '/')) {
+            } else if (parenthesesLevel == 0 && (c == '+' || c == '-' || c == '*' || c == '/' || c == '^')) {
+                // case: ( a + b ) + ( c + d ) -> outer parentheses are not removed.
                 return expression;
             }
         }
+        // cases: ( a + b ) and ( a + b + ( c + d ) ) -> outer parentheses are removed.
         return expression.substring(1,expression.length()-1);
     }
 
