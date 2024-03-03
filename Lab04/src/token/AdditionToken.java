@@ -1,9 +1,9 @@
 package token;
 
-public class AddToken extends OperatorToken {
-    protected AddToken(Token leftToken, Token rightToken) {
+public class AdditionToken extends OperatorToken {
+    protected AdditionToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating ADD TOKEN: " + leftToken + " + " + rightToken); }
+        if (DEBUG_MODE) { System.out.println("Creating ADDITION TOKEN: " + leftToken + " + " + rightToken); }
     }
 
     @Override

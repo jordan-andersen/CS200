@@ -1,9 +1,9 @@
 package token;
 
-public class MulToken extends OperatorToken {
-    protected MulToken(Token leftToken, Token rightToken) {
+public class MultiplicationToken extends OperatorToken {
+    protected MultiplicationToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating MUL TOKEN: " + leftToken + " * " + rightToken); }
+        if (DEBUG_MODE) { System.out.println("Creating MULTIPLICATION TOKEN: " + leftToken + " * " + rightToken); }
     }
 
     @Override

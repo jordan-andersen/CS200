@@ -1,12 +1,12 @@
 package token;
 
-public class ParenToken extends Token {
+public class ParenthesesToken extends Token {
 
     protected final Token token;
 
-    protected ParenToken(Token token) {
+    protected ParenthesesToken(Token token) {
         this.token = token;
-        if (DEBUG_MODE) { System.out.println("Creating PAREN-TOKEN: ( " + token + " )"); }
+        if (DEBUG_MODE) { System.out.println("Creating PARENTHESES TOKEN: ( " + token + " )"); }
     }
 
     @Override

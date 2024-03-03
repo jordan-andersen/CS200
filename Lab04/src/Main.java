@@ -14,6 +14,7 @@ public class Main {
     private static final String RESULT_STRING = "Result: ";
     private static final String PARENTHESES_ERROR = "Expression contains ')('. Please specify the desired operation.";
     private static final String INVALID_INPUT_ERROR = "\nInvalid input: unable to parse!\n";
+
     public static void main(String[] args) {
         Scanner userInput = new Scanner(System.in);
         boolean continueProgram = true;

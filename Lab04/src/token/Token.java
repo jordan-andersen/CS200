@@ -3,6 +3,7 @@ package token;
 public abstract class Token {
     public static boolean DEBUG_MODE = false;
     public static boolean VERBOSE_MODE = false;
+
     public static Token parse(String expression) {
         // Removes parentheses as necessary
         expression = checkParentheses(expression) ? processParentheses(expression) : expression;
@@ -12,30 +13,30 @@ public abstract class Token {
 
         if (operatorIndex != -1) {
             // Split the expression at the operator index
-            String leftString = expression.substring(0, operatorIndex);
-            String rightString = expression.substring(operatorIndex+1);
-            if (DEBUG_MODE) { System.out.println(leftString + " | " + rightString); }
+            String leftSide = expression.substring(0, operatorIndex);
+            String rightSide = expression.substring(operatorIndex+1);
+            if (DEBUG_MODE) { System.out.println(leftSide + " | " + rightSide); }
 
             // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
-            Token leftToken = checkParentheses(leftString) ? new ParenToken(parse(leftString)) : parse(leftString);
-            Token rightToken = checkParentheses(rightString) ? new ParenToken(parse(rightString)) : parse(rightString);
+            Token leftToken = checkParentheses(leftSide) ? new ParenthesesToken(parse(leftSide)) : parse(leftSide);
+            Token rightToken = checkParentheses(rightSide) ? new ParenthesesToken(parse(rightSide)) : parse(rightSide);
 
             // Create appropriate Operator token
             switch (expression.charAt(operatorIndex)) {
                 case '+':
-                    return new AddToken(leftToken, rightToken);
+                    return new AdditionToken(leftToken, rightToken);
                 case '-':
-                    return new SubToken(leftToken, rightToken);
+                    return new SubtractionToken(leftToken, rightToken);
                 case '*':
-                    return new MulToken(leftToken, rightToken);
+                    return new MultiplicationToken(leftToken, rightToken);
                 case '/':
-                    return new DivToken(leftToken, rightToken);
+                    return new DivisionToken(leftToken, rightToken);
                 case '^':
-                    return new ExpToken(leftToken, rightToken);
+                    return new ExponentiationToken(leftToken, rightToken);
             }
         }
         // Parse as a number if no operator found.
-        return new NumToken(Double.parseDouble(expression));
+        return new NumberToken(Double.parseDouble(expression));
     }
 
     private static int getOperatorIndex(String expression) {

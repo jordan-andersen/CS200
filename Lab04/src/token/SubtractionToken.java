@@ -1,9 +1,9 @@
 package token;
 
-public class SubToken extends OperatorToken {
-    protected SubToken(Token leftToken, Token rightToken) {
+public class SubtractionToken extends OperatorToken {
+    protected SubtractionToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating SUB TOKEN: " + leftToken + " - " + rightToken); }
+        if (DEBUG_MODE) { System.out.println("Creating SUBTRACTION TOKEN: " + leftToken + " - " + rightToken); }
     }
 
     @Override
