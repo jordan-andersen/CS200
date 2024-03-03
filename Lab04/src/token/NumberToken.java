@@ -1,11 +1,11 @@
 package token;
 
-public class NumToken extends Token {
+public class NumberToken extends Token {
     protected final double value;
 
-    protected NumToken(double value) {
+    protected NumberToken(double value) {
         this.value = value;
-        if (DEBUG_MODE) { System.out.println("Creating NUM-TOKEN: " + value); }
+        if (DEBUG_MODE) { System.out.println("Creating NUMBER TOKEN: " + value); }
     }
 
     @Override

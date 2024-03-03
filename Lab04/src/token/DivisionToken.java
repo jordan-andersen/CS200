@@ -1,9 +1,9 @@
 package token;
 
-public class DivToken extends OperatorToken {
-    protected DivToken(Token leftToken, Token rightToken) {
+public class DivisionToken extends OperatorToken {
+    protected DivisionToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating DIV TOKEN: " + leftToken + " / " + rightToken); }
+        if (DEBUG_MODE) { System.out.println("Creating DIVISION TOKEN: " + leftToken + " / " + rightToken); }
     }
 
     @Override

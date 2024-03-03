@@ -1,9 +1,9 @@
 package token;
 
-public class ExpToken extends OperatorToken {
-    protected ExpToken(Token leftToken, Token rightToken) {
+public class ExponentiationToken extends OperatorToken {
+    protected ExponentiationToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating DIV TOKEN: " + leftToken + " ^ " + rightToken); }
+        if (DEBUG_MODE) { System.out.println("Creating EXPONENTIATION TOKEN: " + leftToken + " ^ " + rightToken); }
     }
 
     @Override
