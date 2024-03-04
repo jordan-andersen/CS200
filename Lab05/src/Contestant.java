@@ -16,9 +16,9 @@ public abstract class Contestant implements IDisplayable, IMovable {
         this.symbol = symbol;
     }
 
-    public void setTarget(Prize target){
-        this.target = target;
-    }
+    public void setTarget(Prize target){ this.target = target;}
+
+    public Prize getTarget(){ return target; }
 
     @Override
     public int getCoordinateX() { return coordinateX; }
@@ -28,8 +28,6 @@ public abstract class Contestant implements IDisplayable, IMovable {
 
     @Override
     public String getSymbol() { return symbol; }
-
-    public Prize getTarget(){ return target; }
 
     protected static int evalCoordinate(int currentPosition, int targetPosition, int contestantSpeed) {
         int positionDifferential = Math.abs(targetPosition - currentPosition);
