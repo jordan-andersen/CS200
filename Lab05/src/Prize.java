@@ -1,14 +1,19 @@
-public class Prize implements IDisplayable{
+public class Prize implements IDisplayable {
+    // GAME CONSTANTS
+    public static final int START_X = 10;
+    public static final int START_Y = 10;
+    private static final String PRIZE_SYMBOL = "*";
+
     // ATTRIBUTES
     protected int coordinateX;
     protected int coordinateY;
-    protected String symbol;
+    protected final String symbol;
 
     // METHODS
-    public Prize(int coordinateX, int coordinateY){
+    public Prize(int coordinateX, int coordinateY) {
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
-        this.symbol = "*";
+        this.symbol = PRIZE_SYMBOL;
     }
 
     @Override

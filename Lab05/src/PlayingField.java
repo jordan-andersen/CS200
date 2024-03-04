@@ -12,11 +12,10 @@ public class PlayingField {
     private Contestant winner;
 
     // METHODS
-
-    public PlayingField(int width, int height){
+    public PlayingField(int width, int height) {
         this.width = width;
         this.height = height;
-        this.prize = new Prize(Main.PRIZE_X, Main.PRIZE_Y);
+        this.prize = new Prize(Prize.START_X, Prize.START_Y);
         this.contestantList = new ArrayList<>();
         this.movableList = new ArrayList<>();
         this.displayableList = new ArrayList<>();
@@ -24,11 +23,11 @@ public class PlayingField {
         initializeGame();
     }
 
-    private void initializeGame(){
-        Tortoise tortoise = new Tortoise(Main.CONTESTANT_X, Main.CONTESTANT_Y);
-        Hare hare = new Hare(Main.CONTESTANT_X, Main.CONTESTANT_Y);
-        tortoise.chooseTarget(prize);
-        hare.chooseTarget(prize);
+    private void initializeGame() {
+        Tortoise tortoise = new Tortoise(Contestant.START_X, Contestant.START_Y);
+        Hare hare = new Hare(Contestant.START_X, Contestant.START_Y);
+        tortoise.setTarget(prize);
+        hare.setTarget(prize);
         contestantList.add(tortoise);
         contestantList.add(hare);
         movableList.add(tortoise);
@@ -38,13 +37,13 @@ public class PlayingField {
         displayableList.add(prize);
     }
 
-    public void stepGame(){
+    public void stepGame() {
         for (IMovable movableObject : movableList) {
             movableObject.step();
         }
     }
 
-    public boolean checkWin(){
+    public boolean checkWin() {
         int prizeX = prize.getCoordinateX();
         int prizeY = prize.getCoordinateY();
         for (Contestant contestant : contestantList) {
@@ -58,11 +57,12 @@ public class PlayingField {
         return false;
     }
 
-    public String getWinner(){ return winner.getSymbol(); }
-    public String toString(){
+    public String getWinner() { return winner.getSymbol(); }
+
+    public String toString() {
         StringBuilder grid = new StringBuilder();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 1; y <= height; y++) {
+            for (int x = 1; x <= width; x++) {
                 grid.append(" ");
                 boolean cell_filled = false;
                 for (IDisplayable displayObject : displayableList) {

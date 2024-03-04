@@ -1,18 +1,22 @@
-public abstract class Contestant implements IDisplayable, IMovable{
+public abstract class Contestant implements IDisplayable, IMovable {
+    // GAME CONSTANTS
+    public static final int START_X = 2;
+    public static final int START_Y = 2;
+
     // ATTRIBUTES
     protected int coordinateX;
     protected int coordinateY;
-    protected String symbol;
+    protected final String symbol;
     protected Prize target;
 
     // METHODS
-    protected Contestant(int coordinateX, int coordinateY, String symbol){
+    protected Contestant(int coordinateX, int coordinateY, String symbol) {
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
         this.symbol = symbol;
     }
 
-    public void chooseTarget(Prize target){
+    public void setTarget(Prize target){
         this.target = target;
     }
 

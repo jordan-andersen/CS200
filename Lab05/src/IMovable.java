@@ -1,3 +1,3 @@
-public interface IMovable {
+interface IMovable {
     void step();
 }

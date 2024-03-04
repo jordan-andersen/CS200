@@ -4,12 +4,6 @@ public class Main {
     // GAME CONSTANTS
     public static final int GAME_WIDTH = 12;
     public static final int GAME_HEIGHT = 12;
-    public static final int CONTESTANT_X = 2;
-    public static final int CONTESTANT_Y = 2;
-    public static final int PRIZE_X = 10;
-    public static final int PRIZE_Y = 10;
-    public static final int TORTOISE_SPEED = 1;
-    public static final int HARE_SPEED = 2;
 
     // STRING CONSTANTS
     private static final String USER_PROMPT = "Press ENTER to continue...";

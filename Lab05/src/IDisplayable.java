@@ -1,4 +1,4 @@
-public interface IDisplayable {
+interface IDisplayable {
     String getSymbol();
     int getCoordinateX();
     int getCoordinateY();
