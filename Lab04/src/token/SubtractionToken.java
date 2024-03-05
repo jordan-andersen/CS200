@@ -3,7 +3,9 @@ package token;
 public class SubtractionToken extends OperatorToken {
     protected SubtractionToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating SUBTRACTION TOKEN: " + leftToken + " - " + rightToken); }
+        if (DEBUG_MODE) {
+            System.out.println("Creating SUBTRACTION TOKEN: " + leftToken + " - " + rightToken);
+        }
     }
 
     @Override
@@ -11,7 +13,9 @@ public class SubtractionToken extends OperatorToken {
         double leftEval = leftToken.eval();
         double rightEval = rightToken.eval();
         double result = leftEval - rightEval;
-        if (VERBOSE_MODE) { System.out.println("Evaluating: " + leftEval + " - " + rightEval + " = " + result);}
+        if (VERBOSE_MODE) {
+            System.out.println("Evaluating: " + leftEval + " - " + rightEval + " = " + result);
+        }
         return result;
     }
 

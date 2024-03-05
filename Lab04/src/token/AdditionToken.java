@@ -3,7 +3,9 @@ package token;
 public class AdditionToken extends OperatorToken {
     protected AdditionToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating ADDITION TOKEN: " + leftToken + " + " + rightToken); }
+        if (DEBUG_MODE) {
+            System.out.println("Creating ADDITION TOKEN: " + leftToken + " + " + rightToken);
+        }
     }
 
     @Override
@@ -11,7 +13,9 @@ public class AdditionToken extends OperatorToken {
         double leftEval = leftToken.eval();
         double rightEval = rightToken.eval();
         double result = leftEval + rightEval;
-        if (VERBOSE_MODE) { System.out.println("Evaluating: " + leftEval + " + " + rightEval + " = " + result);}
+        if (VERBOSE_MODE) {
+            System.out.println("Evaluating: " + leftEval + " + " + rightEval + " = " + result);
+        }
         return result;
     }
 

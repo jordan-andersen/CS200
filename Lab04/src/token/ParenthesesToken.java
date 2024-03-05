@@ -6,7 +6,9 @@ public class ParenthesesToken extends Token {
 
     protected ParenthesesToken(Token token) {
         this.token = token;
-        if (DEBUG_MODE) { System.out.println("Creating PARENTHESES TOKEN: ( " + token + " )"); }
+        if (DEBUG_MODE) {
+            System.out.println("Creating PARENTHESES TOKEN: ( " + token + " )");
+        }
     }
 
     @Override

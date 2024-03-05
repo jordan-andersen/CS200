@@ -15,7 +15,10 @@ public abstract class Token {
             // Split the expression at the operator index
             String leftSide = expression.substring(0, operatorIndex);
             String rightSide = expression.substring(operatorIndex+1);
-            if (DEBUG_MODE) { System.out.println(leftSide + " | " + rightSide); }
+
+            if (DEBUG_MODE) {
+                System.out.println(leftSide + " | " + rightSide);
+            }
 
             // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
             Token leftToken = checkParentheses(leftSide) ? new ParenthesesToken(parse(leftSide)) : parse(leftSide);
@@ -50,7 +53,11 @@ public abstract class Token {
         for (int i = 0; i < expression.length(); i++) {
             char c = expression.charAt(i);
             boolean notNegativeNumber = isPreviousClosedParentheses || isPreviousDigit;
-            if (c =='(') { parenthesisCount++ ; }
+
+            if (c =='(') {
+                parenthesisCount++ ;
+            }
+
             if (parenthesisCount == 0) {
                 if (c == '^') {
                     if (precedenceValue == 0) {
@@ -66,10 +73,12 @@ public abstract class Token {
                     operatorIndex = i;
                 }
             }
+
             if ( c ==')' ) {
                 parenthesisCount--;
                 isPreviousClosedParentheses = true;
             }
+
             isPreviousDigit = Character.isDigit(c);
         }
         return operatorIndex;
@@ -92,7 +101,13 @@ public abstract class Token {
         return expression.substring(1,expression.length()-1);
     }
 
-    private static boolean checkParentheses(String s) { return s.startsWith("(") && s.endsWith(")"); }
+    private static boolean checkParentheses(String expression) {
+        if (!(expression.contains("(") || expression.contains(")"))) {
+            return false;
+        } else {
+            return !expression.equals(processParentheses(expression));
+        }
+    }
 
     public static void setDebugMode(boolean b) { DEBUG_MODE = b; }
 

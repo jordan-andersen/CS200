@@ -3,7 +3,9 @@ package token;
 public class MultiplicationToken extends OperatorToken {
     protected MultiplicationToken(Token leftToken, Token rightToken) {
         super(leftToken, rightToken);
-        if (DEBUG_MODE) { System.out.println("Creating MULTIPLICATION TOKEN: " + leftToken + " * " + rightToken); }
+        if (DEBUG_MODE) {
+            System.out.println("Creating MULTIPLICATION TOKEN: " + leftToken + " * " + rightToken);
+        }
     }
 
     @Override
@@ -11,7 +13,9 @@ public class MultiplicationToken extends OperatorToken {
         double leftEval = leftToken.eval();
         double rightEval = rightToken.eval();
         double result = leftEval * rightEval;
-        if (VERBOSE_MODE) { System.out.println("Evaluating: " + leftEval + " * " + rightEval + " = " + result);}
+        if (VERBOSE_MODE) {
+            System.out.println("Evaluating: " + leftEval + " * " + rightEval + " = " + result);
+        }
         return result;
     }
 
