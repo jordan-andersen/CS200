@@ -56,7 +56,9 @@ public class PlayingField {
         return false;
     }
 
-    public String getWinner() { return winner.getSymbol(); }
+    public String getWinner() {
+        return winner != null ? winner.getSymbol(): "NO ONE HAS WON YET!";
+    }
 
     public String toString() {
         StringBuilder grid = new StringBuilder();
