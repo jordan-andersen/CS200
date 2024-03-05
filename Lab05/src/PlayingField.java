@@ -19,7 +19,6 @@ public class PlayingField {
         this.contestantList = new ArrayList<>();
         this.movableList = new ArrayList<>();
         this.displayableList = new ArrayList<>();
-        this.winner = null;
         initializeGame();
     }
 
