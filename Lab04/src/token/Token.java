@@ -5,9 +5,10 @@ public abstract class Token {
     public static boolean VERBOSE_MODE = false;
 
     public static Token parse(String expression) {
-        // Removes parentheses as necessary
-        expression = checkParentheses(expression) ? processParentheses(expression) : expression;
-
+        // Processes parentheses as necessary
+        if (checkParentheses(expression)) {
+            return new ParenthesesToken(parse(processParentheses(expression)));
+        }
         // Find the lowest precedence operator
         int operatorIndex = getOperatorIndex(expression);
 
@@ -20,9 +21,9 @@ public abstract class Token {
                 System.out.println(leftSide + " | " + rightSide);
             }
 
-            // Check if sub-expressions are wrapped in parentheses and recursively parses further tokens
-            Token leftToken = checkParentheses(leftSide) ? new ParenthesesToken(parse(leftSide)) : parse(leftSide);
-            Token rightToken = checkParentheses(rightSide) ? new ParenthesesToken(parse(rightSide)) : parse(rightSide);
+            // Recursively parses further tokens
+            Token leftToken = parse(leftSide);
+            Token rightToken = parse(rightSide);
 
             // Create appropriate Operator token
             switch (expression.charAt(operatorIndex)) {
