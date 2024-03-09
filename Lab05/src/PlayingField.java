@@ -15,7 +15,7 @@ public class PlayingField {
     public PlayingField(int width, int height) {
         this.width = width;
         this.height = height;
-        this.prize = new Prize(Prize.START_X, Prize.START_Y);
+        this.prize = new Prize((int) (Math.random() * width), (int) (Math.random() * height));
         this.contestantList = new ArrayList<>();
         this.movableList = new ArrayList<>();
         this.displayableList = new ArrayList<>();
@@ -62,8 +62,8 @@ public class PlayingField {
 
     public String toString() {
         StringBuilder grid = new StringBuilder();
-        for (int y = 1; y <= height; y++) {
-            for (int x = 1; x <= width; x++) {
+        for (int y = 0; y <= height; y++) {
+            for (int x = 0; x <= width; x++) {
                 grid.append(" ");
                 boolean cell_filled = false;
                 for (Displayable displayObject : displayableList) {
