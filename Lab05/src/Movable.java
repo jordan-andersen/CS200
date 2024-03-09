@@ -1,0 +1,3 @@
+interface Movable {
+    void step();
+}

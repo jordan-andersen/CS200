@@ -10,7 +10,9 @@ public class Tortoise extends Contestant {
 
     @Override
     public void step() {
-        coordinateX = evalCoordinate(coordinateX, target.getCoordinateX(), TORTOISE_SPEED);
-        coordinateY = evalCoordinate(coordinateY, target.getCoordinateY(), TORTOISE_SPEED);
+        Coordinate targetOffset = position.getOffset(target.getPosition());
+        int newX = evalCoordinate(position.x(), targetOffset.x(), TORTOISE_SPEED);
+        int newY = evalCoordinate(position.y(), targetOffset.y(), TORTOISE_SPEED);
+        position = new Coordinate(newX, newY);
     }
 }

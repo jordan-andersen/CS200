@@ -1,26 +1,21 @@
-public class Prize implements IDisplayable {
+public class Prize implements Displayable {
     // GAME CONSTANTS
-    public static final int START_X = 10;
-    public static final int START_Y = 10;
+    public static final int START_X = 9;
+    public static final int START_Y = 9;
     private static final String PRIZE_SYMBOL = "*";
 
     // ATTRIBUTES
-    protected int coordinateX;
-    protected int coordinateY;
+    protected Coordinate position;
     protected final String symbol;
 
     // METHODS
     public Prize(int coordinateX, int coordinateY) {
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+        this.position = new Coordinate(coordinateX, coordinateY);
         this.symbol = PRIZE_SYMBOL;
     }
 
     @Override
-    public int getCoordinateX() { return coordinateX; }
-
-    @Override
-    public int getCoordinateY() { return coordinateY; }
+    public Coordinate getPosition() { return position; }
 
     @Override
     public String getSymbol() { return symbol; }

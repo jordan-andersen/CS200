@@ -1,3 +1,0 @@
-interface IMovable {
-    void step();
-}

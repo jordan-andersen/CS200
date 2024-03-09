@@ -7,8 +7,8 @@ public class PlayingField {
     private final int height;
     private final Prize prize;
     private final List<Contestant> contestantList;
-    private final List<IMovable> movableList;
-    private final List<IDisplayable> displayableList;
+    private final List<Movable> movableList;
+    private final List<Displayable> displayableList;
     private Contestant winner;
 
     // METHODS
@@ -37,17 +37,17 @@ public class PlayingField {
     }
 
     public void stepGame() {
-        for (IMovable movableObject : movableList) {
+        for (Movable movableObject : movableList) {
             movableObject.step();
         }
     }
 
     public boolean checkWin() {
-        int prizeX = prize.getCoordinateX();
-        int prizeY = prize.getCoordinateY();
+        int prizeX = prize.getPosition().x();
+        int prizeY = prize.getPosition().y();
         for (Contestant contestant : contestantList) {
-            int contestantX = contestant.getCoordinateX();
-            int contestantY = contestant.getCoordinateY();
+            int contestantX = contestant.getPosition().x();
+            int contestantY = contestant.getPosition().y();
             if (contestantX == prizeX && contestantY == prizeY) {
                 winner = contestant;
                 return true;
@@ -66,9 +66,9 @@ public class PlayingField {
             for (int x = 1; x <= width; x++) {
                 grid.append(" ");
                 boolean cell_filled = false;
-                for (IDisplayable displayObject : displayableList) {
-                    int objectX = displayObject.getCoordinateX();
-                    int objectY = displayObject.getCoordinateY();
+                for (Displayable displayObject : displayableList) {
+                    int objectX = displayObject.getPosition().x();
+                    int objectY = displayObject.getPosition().y();
                     if (objectX == x && objectY == y && !cell_filled) {
                         cell_filled = true;
                         grid.append(displayObject.getSymbol());
