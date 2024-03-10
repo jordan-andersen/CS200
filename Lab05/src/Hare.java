@@ -14,9 +14,7 @@ public class Hare extends Contestant {
 
     @Override
     public void step() {
-        if (energy < 1) {
-           energy = 3;
-        } else {
+        if (energy > 0) {
             Coordinate targetOffset = position.getOffset(target.getPosition());
             if (targetOffset.x() != 0) {
                 position = new Coordinate(evalCoordinate(position.x(), targetOffset.x(), HARE_SPEED), position.y());
@@ -24,6 +22,8 @@ public class Hare extends Contestant {
                 position = new Coordinate(position.x(), evalCoordinate(position.y(), targetOffset.y(), HARE_SPEED));
             }
             energy --;
+        } else {
+            energy = 3;
         }
     }
 }
