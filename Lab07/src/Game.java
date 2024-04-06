@@ -6,7 +6,6 @@ public class Game {
     private Space prevSpace;
 
     // METHODS
-
     public Game () {
         initializeGame();
     }
@@ -82,7 +81,6 @@ public class Game {
         } else {
             return false;
         }
-
     }
 
     public boolean gameOver() {
@@ -90,7 +88,7 @@ public class Game {
         int countA = findRowCount();
         seekByIndex(7);
         int countB = findRowCount();
-        return !(countA == 0 | countB == 0);
+        return countA == 0 | countB == 0;
     }
 
     private int findRowCount() {
@@ -124,7 +122,7 @@ public class Game {
     public String toString() {
         seekByIndex(1);
         StringBuilder board = new StringBuilder();
-        StringBuilder boardRow1 = new StringBuilder("\t");
+        StringBuilder boardRow1 = new StringBuilder("\n\t");
         StringBuilder boardRow2 = new StringBuilder("\n\t");
         StringBuilder goalRow = new StringBuilder("\n");
         boolean playerSwitch = currPlayer.getName().equals("ONE");
@@ -144,7 +142,7 @@ public class Game {
             incrementSpace();
             continueLoop = currSpace.getIndex() != 1;
         }
-        goalRow.append(playerOneGoal).append("=".repeat(boardRow1.length()-3)).append(playerTwoGoal);
+        goalRow.append(playerOneGoal).append("=".repeat(boardRow1.length()-4)).append(playerTwoGoal);
         board.append(boardRow1).append(goalRow).append(boardRow2);
         return board.toString();
     }
