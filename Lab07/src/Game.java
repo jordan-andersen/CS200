@@ -67,11 +67,11 @@ public class Game {
             int j = 1;
             while (j <= 4) {
                 incrementSpace();
-                if (!(currSpace instanceof Goal)) {
+                if (currSpace.getIndex() != 0) {
                     currSpace.incrementCount();
                     j++;
                 } else {
-                    if (((Goal) currSpace).getOwner().equals(currPlayer)) { // <-- Eww, I know, I was rushed.
+                    if (currSpace.equals(currPlayer.getGoal())) {
                         currSpace.incrementCount();
                         j++;
                     }
