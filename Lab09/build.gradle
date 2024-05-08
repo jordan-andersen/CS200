@@ -1,0 +1,28 @@
+plugins {
+    id "java"
+    id "application"
+    id "org.openjfx.javafxplugin" version "0.1.0"
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java.srcDir("src")
+        resources.srcDir("resources")
+    }
+}
+
+javafx {
+    version = "22"
+    modules = ["javafx.fxml", "javafx.controls"]
+}
+
+application {
+    mainClass = "Main"
+}
