@@ -24,65 +24,65 @@ import java.util.stream.Collectors;
 
 public class Controller {
     @FXML
-    public MenuItem menuNewFile;
+    private MenuItem menuNewFile;
     @FXML
-    public MenuItem menuLoadFile;
+    private MenuItem menuLoadFile;
     @FXML
-    public MenuItem menuClose;
+    private MenuItem menuClose;
     @FXML
-    public TableView<Datapoint> rawTable;
+    private TableView<Datapoint> rawTable;
     @FXML
-    public TableColumn<Datapoint, String> rawTimeCol;
+    private TableColumn<Datapoint, String> rawTimeCol;
     @FXML
-    public TableColumn<Datapoint, String> rawNorthLatCol;
+    private TableColumn<Datapoint, String> rawNorthLatCol;
     @FXML
-    public TableColumn<Datapoint, String> rawNorthLongCol;
+    private TableColumn<Datapoint, String> rawNorthLongCol;
     @FXML
-    public TableColumn<Datapoint, String> rawCenterLatCol;
+    private TableColumn<Datapoint, String> rawCenterLatCol;
     @FXML
-    public TableColumn<Datapoint, String> rawCenterLongCol;
+    private TableColumn<Datapoint, String> rawCenterLongCol;
     @FXML
-    public TableColumn<Datapoint, String> rawSouthLatCol;
+    private TableColumn<Datapoint, String> rawSouthLatCol;
     @FXML
-    public TableColumn<Datapoint, String> rawSouthLongCol;
+    private TableColumn<Datapoint, String> rawSouthLongCol;
     @FXML
-    public TableView<Datapoint> inputTable;
+    private TableView<Datapoint> inputTable;
     @FXML
-    public TableColumn<Datapoint, String> inputTimeCol;
+    private TableColumn<Datapoint, String> inputTimeCol;
     @FXML
-    public TableColumn<Datapoint, String> inputNorthLatCol;
+    private TableColumn<Datapoint, String> inputNorthLatCol;
     @FXML
-    public TableColumn<Datapoint, String> inputNorthLongCol;
+    private TableColumn<Datapoint, String> inputNorthLongCol;
     @FXML
-    public TableColumn<Datapoint, String> inputCenterLatCol;
+    private TableColumn<Datapoint, String> inputCenterLatCol;
     @FXML
-    public TableColumn<Datapoint, String> inputCenterLongCol;
+    private TableColumn<Datapoint, String> inputCenterLongCol;
     @FXML
-    public TableColumn<Datapoint, String> inputSouthLatCol;
+    private TableColumn<Datapoint, String> inputSouthLatCol;
     @FXML
-    public TableColumn<Datapoint, String> inputSouthLongCol;
+    private TableColumn<Datapoint, String> inputSouthLongCol;
     @FXML
-    public LineChart<String, Double> latChart;
+    private LineChart<String, Double> latChart;
     @FXML
-    public LineChart<String, Double> longChart;
+    private LineChart<String, Double> longChart;
     @FXML
-    public DatePicker inputDateField;
+    private DatePicker inputDateField;
     @FXML
-    public TextField inputTimeField;
+    private TextField inputTimeField;
     @FXML
-    public TextField inputNorthLatField;
+    private TextField inputNorthLatField;
     @FXML
-    public TextField inputNorthLongField;
+    private TextField inputNorthLongField;
     @FXML
-    public TextField inputCentralLatField;
+    private TextField inputCentralLatField;
     @FXML
-    public TextField inputCentralLongField;
+    private TextField inputCentralLongField;
     @FXML
-    public TextField inputSouthLatField;
+    private TextField inputSouthLatField;
     @FXML
-    public TextField inputSouthLongField;
+    private TextField inputSouthLongField;
     @FXML
-    public Button inputButton;
+    private Button inputButton;
     private Stage stage;
     private File dataFile;
 
@@ -206,11 +206,7 @@ public class Controller {
     }
 
     public void newFile(ActionEvent e) {
-                // CLEAR ALL DATA
-        rawTable.getItems().clear();
-        inputTable.getItems().clear();
-        latChart.getData().clear();
-        longChart.getData().clear();
+        clearData();
     }
 
     public void loadFile(ActionEvent e) {
@@ -234,18 +230,6 @@ public class Controller {
                                         datapoint.getMoment().toString(),
                                         safeAsDouble(datapoint.getNorthern().getLongitude())))
                                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                XYChart.Series<String, Double> centralLatSeries = new XYChart.Series<>("Central",
-                        datapoints.stream()
-                                .map(datapoint -> new XYChart.Data<>(
-                                        datapoint.getMoment().toString(),
-                                        safeAsDouble(datapoint.getCentral().getLatitude())))
-                                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-                XYChart.Series<String, Double> centralLongSeries = new XYChart.Series<>( "Central",
-                        datapoints.stream()
-                                .map(datapoint -> new XYChart.Data<>(
-                                        datapoint.getMoment().toString(),
-                                        safeAsDouble(datapoint.getCentral().getLongitude())))
-                                .collect(Collectors.toCollection(FXCollections::observableArrayList)));
                 XYChart.Series<String, Double> southernLatSeries = new XYChart.Series<>("Southern",
                         datapoints.stream()
                                 .map(datapoint -> new XYChart.Data<>(
@@ -258,13 +242,13 @@ public class Controller {
                                         datapoint.getMoment().toString(),
                                         safeAsDouble(datapoint.getSouthern().getLongitude())))
                                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+                // CLEAR PROGRAM DATA
+                clearData();
                 // UPDATE TABLE DATA
                 rawTable.getItems().addAll(datapoints);
                 // UPDATE CHART DATA
                 latChart.getData().add(northernLatSeries);
                 longChart.getData().add(northernLongSeries);
-                latChart.getData().add(centralLatSeries);
-                longChart.getData().add(centralLongSeries);
                 latChart.getData().add(southernLatSeries);
                 longChart.getData().add(southernLongSeries);
                 // UPDATE GUI DATA
@@ -274,6 +258,14 @@ public class Controller {
             System.out.println(exception.getMessage());
         }
     }
+
+    private void clearData() {
+        rawTable.getItems().clear();
+        inputTable.getItems().clear();
+        latChart.getData().clear();
+        longChart.getData().clear();
+    }
+
     private static Double safeAsDouble(Degree degree) {
         if (degree != null) {
             return degree.asDouble();
