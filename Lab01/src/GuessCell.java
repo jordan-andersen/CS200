@@ -18,10 +18,10 @@ public class GuessCell {
      * Convenience map of ASCII color codes. This is used to look up the terminal code for a color given its name.
      */
     private static final Map<String, String> colors = Map.ofEntries(
-            entry("red", "\u001B[31m"),
-            entry("yellow", "\u001B[33m"),
-            entry("green", "\u001B[32m"),
-            entry("blue", "\u001B[34m")
+            entry("R", "\u001B[31m"),
+            entry("Y", "\u001B[33m"),
+            entry("G", "\u001B[32m"),
+            entry("B", "\u001B[34m")
     );
     
     private static final String RESET =  "\u001B[0m"; 

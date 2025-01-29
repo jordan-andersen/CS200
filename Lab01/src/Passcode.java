@@ -1,9 +1,9 @@
+/**
+ *  A passcode holds a number of guess cells and is the primary data of a mastermind guessing game. A
+ * passcode can be created either by random selection for the game's reference passcode, or by user input
+ *
+ */
 public class Passcode {
-    /**
-     *  A passcode holds a number of guess cells and is the primary data of a mastermind guessing game. A
-     * passcode can be created either by random selection for the game's reference passcode, or by user input
-     *
-     */
 
     // ATTRIBUTES
     private final GuessCell[] cellArray;
